@@ -13,6 +13,6 @@ class Category extends Model
     protected $guarded=[];
 
     public function reports(): HasMany{
-        return $this->hasMany(Report::class, 'category_id', 'id');
+        return $this->hasMany(Report::class, 'score_id', 'id');
     }
 }
