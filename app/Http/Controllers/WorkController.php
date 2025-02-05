@@ -16,13 +16,13 @@ class WorkController extends Controller
         $works = Work::where('user_id', Auth::user()->id)->get();
         $categories = Category::all();
         $userId = Auth::id();
-        return view('work.index', compact('works', 'userId', 'categories'));
+        return view('works.index', compact('works', 'userId', 'categories'));
     }
     public function create()
     {
         $categories = Category::all();
         $works = Work::all();
-        return view('work.create', compact('categories', 'works'));
+        return view('works.create', compact('categories', 'works'));
     }
     public function store(Request $request): RedirectResponse 
     {
