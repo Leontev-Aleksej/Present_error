@@ -11,7 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('works', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('path_img');
+            $table->enum('score', ['Без оценки', 'Низкий балл', 'Средний балл', 'Высший балл']);
+            $table->foreignId('category_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('works');
     }
 };

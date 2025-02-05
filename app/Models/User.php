@@ -7,10 +7,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    public function reports(): HasMany{
+        return $this->HasMany(Report::class);
+    }
+
+    const ADMIN_ROLE='admin';
+
+    public function isAdmin(){
+        return $this->role===self::ADMIN_ROLE;
+    }
 
     /**
      * The attributes that are mass assignable.
