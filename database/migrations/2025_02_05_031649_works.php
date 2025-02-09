@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('path_img')->nullable();
             $table->enum('score', ['Без оценки', 'Низкий балл', 'Средний балл', 'Высший балл']);
-            $table->foreignId('category_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->timestamps();
         });
     }

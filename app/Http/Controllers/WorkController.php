@@ -22,24 +22,31 @@ class WorkController extends Controller
     {
         $categories = Category::all();
         $works = Work::all();
-        return view('works.create', compact('categories', 'works'));
+        $userId = Auth::id();
+        return view('works.create', compact('categories', 'works', 'userId'));
     }
     public function store(Request $request): RedirectResponse 
     {
+        // dd($request);
+
+        // die();
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
-            'path_img' => 'image|mimes:png,jpg,jpeg,gif|max:800',
+            'path_img' => 'image|mimes:png,jpg,jpeg,gif|max:1000',
           ]);
+
+        //   dd("ASDASD");
+        //   die();
 
           $imageName = time() . '.' . $request['path_img']->extension();
           $request['path_img']->move(public_path('images'), $imageName);
           
-          Report::create([
+          Work::create([
             'title' => $request->title,
             'path_img' => $imageName,
             "user_id" => Auth::user()->id,
             "category_id" => $request->category,
-            "score" => "без оценки",
+            "score" => "Без оценки",
         ]);
 
           return redirect()->route('dashboard');

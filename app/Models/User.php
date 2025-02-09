@@ -13,8 +13,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public function reports(): HasMany{
-        return $this->HasMany(Report::class);
+    public function works(): HasMany{
+        return $this->HasMany(Work::class);
     }
 
     const ADMIN_ROLE='admin';
@@ -29,6 +29,11 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'name',
+        'middlename',
+        'lastname',
+        'school',
+        'class',
         'name',
         'email',
         'password',

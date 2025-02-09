@@ -12,7 +12,7 @@ class Category extends Model
 
     protected $guarded=[];
 
-    public function reports(): HasMany{
-        return $this->hasMany(Report::class, 'score_id', 'id');
+    public function works(): HasMany{
+        return $this->hasMany(Work::class, 'score_id', 'id');
     }
 }
